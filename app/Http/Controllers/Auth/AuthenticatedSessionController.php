@@ -31,11 +31,14 @@ class AuthenticatedSessionController extends Controller
         $user = $request->user();
         if($user->hasRole('Super Admin')){
             return redirect()->intended(route('super-admin-dashboard', absolute: false));
-        }elseif($user->hasRole('Admin')){
+        }else{
             return redirect()->intended(route('admin-dashboard', absolute: false));
-        }elseif($user->hasRole('User')){
-            return redirect()->intended(route('dashboard', absolute: false));
         }
+        
+        // elseif($user->hasRole('Admin')){
+        // }elseif($user->hasRole('User')){
+        //     return redirect()->intended(route('dashboard', absolute: false));
+        // }
         return redirect()->intended(route('login', absolute: false));
     }
 
